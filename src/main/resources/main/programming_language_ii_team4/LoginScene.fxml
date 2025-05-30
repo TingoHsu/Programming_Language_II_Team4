@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXRadioButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.programming_language_ii_team4.LoginFrameController">
+   <children>
+      <VBox layoutX="96.0" layoutY="32.0" prefHeight="597.0" prefWidth="407.0" spacing="5.0">
+         <children>
+            <Label text="Username:">
+               <font>
+                  <Font name="Microsoft Sans Serif" size="20.0" />
+               </font>
+            </Label>
+            <TextField fx:id="usernameField" prefHeight="43.0" prefWidth="475.0" style="-fx-background-radius: 10;">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </TextField>
+            <Label text="Password:">
+               <font>
+                  <Font name="Microsoft Sans Serif" size="20.0" />
+               </font>
+            </Label>
+            <TextField fx:id="passwordField" style="-fx-background-radius: 10;">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </TextField>
+            <Label text="Gender:">
+               <font>
+                  <Font name="Microsoft Sans Serif" size="20.0" />
+               </font>
+            </Label>
+            <FlowPane alignment="CENTER" hgap="60.0" prefHeight="35.0" prefWidth="386.0">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+               <children>
+                  <JFXRadioButton fx:id="maleBtn" text="Male">
+                     <selectedColor>
+                        <Color red="0.021052632480859756" green="0.021052632480859756" blue="0.021052632480859756" />
+                     </selectedColor>
+                     <font>
+                        <Font name="Microsoft Sans Serif" size="20.0" />
+                     </font>
+                     <toggleGroup>
+                        <ToggleGroup fx:id="genderBtnGroup" />
+                     </toggleGroup>
+                  </JFXRadioButton>
+                  <JFXRadioButton fx:id="femaleBtn" text="Female" toggleGroup="$genderBtnGroup">
+                     <selectedColor>
+                        <Color red="0.021052632480859756" green="0.021052632480859756" blue="0.021052632480859756" />
+                     </selectedColor>
+                     <font>
+                        <Font name="Microsoft Sans Serif" size="20.0" />
+                     </font>
+                  </JFXRadioButton>
+               </children>
+            </FlowPane>
+            <FlowPane alignment="CENTER" hgap="50.0" prefHeight="78.0" prefWidth="386.0">
+               <children>
+                  <JFXButton fx:id="enrollBtn" onAction="#enrollBtnOnAction" prefHeight="40.0" prefWidth="165.0" style="-fx-border-color: black; -fx-border-radius: 10; -fx-background-color: #EEEEEE;" text="Enroll">
+                     <font>
+                        <Font name="Microsoft Sans Serif" size="20.0" />
+                     </font>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <cursor>
+                        <Cursor fx:constant="DEFAULT" />
+                     </cursor>
+                  </JFXButton>
+                  <JFXButton fx:id="LoginBtn" onAction="#loginBtnOnAction" prefHeight="40.0" prefWidth="165.0" style="-fx-border-color: black; -fx-border-radius: 10; -fx-background-color: #EEEEEE;" text="Login">
+                     <font>
+                        <Font name="Microsoft Sans Serif" size="20.0" />
+                     </font>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <cursor>
+                        <Cursor fx:constant="DEFAULT" />
+                     </cursor>
+                  </JFXButton>
+               </children></FlowPane>
+         </children>
+         <padding>
+            <Insets left="10.0" right="10.0" />
+         </padding>
+      </VBox>
+   </children>
+</AnchorPane>

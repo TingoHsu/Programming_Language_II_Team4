@@ -1,0 +1,138 @@
+package main.programming_language_ii_team4;
+
+import java.sql.*;
+
+public class UserDB {
+    private final String server = "jdbc:mysql://140.119.19.73:3315/";
+    private final String database = "TG04"; // change to your own database
+    private final String url = server + database + "?useSSL=false";
+    private final String dbUser = "TG04";// change to your own username
+    private final String dbPassword = "XFvnCp";// change to your own password
+
+    private Connection conn;
+
+    public UserDB() {
+        try {
+            conn = DriverManager.getConnection(url, dbUser, dbPassword);
+
+            //Write the sql query to create a table with 3 columns: id (as primarykey), username, and password_hash
+            String createTableSQL = "CREATE TABLE IF NOT EXISTS users (" + "id INT AUTO_INCREMENT PRIMARY KEY, " + "username VARCHAR(255) UNIQUE, " + "password_hash VARCHAR(255), " + "gender VARCHAR(10))";
+
+            conn.createStatement().execute(createTableSQL);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void register(String username, String password, String gender) throws Exception {
+        if (username.isEmpty()) throw new UserError("Username can't be empty");
+        if (password.length() != 8) throw new PasswordError("Password should be 8 characters");
+        if (!password.matches(".*[a-zA-Z].*")) throw new PasswordError("Password must contain at least 1 letter");
+        if (!checkUserExist(username) && gender == null) throw new GenderError("Gender isn't selected");
+
+        String hash = customHash(password);
+
+        //write the sql query to insert user information into the table
+        //hint: use PreparedStatement and executeUpdate() to complete the insertion
+
+        String query = "INSERT INTO users (username, password_hash, gender) VALUES (?, ?, ?)";
+        try (PreparedStatement stmt = conn.prepareStatement(query)) {
+            stmt.setString(1, username);
+            stmt.setString(2, hash);
+            stmt.setString(3, gender);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            if (e.getMessage().contains("Duplicate")) {
+                throw new UserError("Username already exists");
+            }
+            throw new Exception("Database error");
+        }
+    }
+
+    public void login(String username, String password) throws Exception {
+        //write the sql query to select the password hash for the given username
+        //hint: use PreparedStatement to perform the lookup, and name the ResultSet asrs for use in the code below
+        String query = "SELECT * FROM users WHERE username = ?";
+        PreparedStatement stmt = conn.prepareStatement(query);
+        stmt.setString(1, username);
+        ResultSet rs = stmt.executeQuery();
+        //check if the username exists
+        if (!rs.next()) throw new UserError("Can't find the user");
+        String dbHash = rs.getString("password_hash");
+        String inputHash = customHash(password);
+        if (!dbHash.equals(inputHash)) throw new PasswordError("Password is wrong");
+        rs.close();
+        stmt.close();
+    }
+
+    public String customHash(String pw){
+        StringBuilder sb = new StringBuilder(pw);
+        for (int i=0; i<sb.length(); i++) {
+            char ch = sb.charAt(i);
+            if (Character.isLetter(ch)){
+                if (ch == 'z' || ch == 'Z') {
+                    sb.setCharAt(i, (char) ((int) ch - 25));
+                } else {
+                    sb.setCharAt(i, (char) ((int) ch + 1));
+                }
+            }
+        }
+        int sum1=0, sum2=0;
+        for (int i=0; i<sb.length(); i++) {
+            char ch = sb.charAt(i);
+            if (Character.isLetter(ch)) {
+                int pos = (int) ch - 64;
+                while (pos > 0) {
+                    int digit = pos % 10;
+                    sum1 += digit;
+                    pos /= 10;
+                }
+            }
+        }
+        for (int i=0; i<Integer.toString(sum1).length(); i++) {
+            while (sum1>0) {
+                int digit = sum1%10;
+                sum2+=digit;
+                sum1/=10;
+            }
+        }
+        sb.append(sum2);
+        return sb.toString();
+    }
+
+    public boolean checkUserExist (String name) {
+        boolean exist;
+        String query = "SELECT username FROM users WHERE username = ?";
+        try {
+            PreparedStatement stmt = conn.prepareStatement(query);
+            stmt.setString(1, name);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                exist = true;
+            } else {
+                exist = false;
+            }
+            stmt.close();
+            rs.close();
+            return exist;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+}
+
+class UserError extends Exception {
+    public UserError(String Error){
+        super(Error);
+    }
+}
+class PasswordError extends Exception {
+    public PasswordError(String Error){
+        super(Error);
+    }
+}
+class GenderError extends Exception {
+    public GenderError(String Error){
+        super(Error);
+    }
+}
