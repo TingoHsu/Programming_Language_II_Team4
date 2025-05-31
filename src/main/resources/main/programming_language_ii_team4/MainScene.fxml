@@ -1,16 +1,120 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="700.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.programming_language_ii_team4.MainFrameController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.programming_language_ii_team4.MainSceneController">
    <children>
-      <Label fx:id="label" alignment="CENTER" layoutX="122.0" layoutY="168.0" prefHeight="64.0" prefWidth="354.0">
+      <Label layoutX="250.0" layoutY="379.0" prefHeight="32.0" prefWidth="99.0" text="風格選擇" textAlignment="JUSTIFY">
          <font>
-            <Font size="43.0" />
+            <Font size="24.0" />
          </font>
       </Label>
+      <Label layoutX="250.0" layoutY="50.0" prefHeight="32.0" prefWidth="99.0" text="氣象資訊" textAlignment="JUSTIFY">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Pane layoutX="118.0" layoutY="85.0" prefHeight="265.0" prefWidth="364.0">
+         <children>
+            <TextField fx:id="cityInput" layoutX="14.0" layoutY="14.0" prefHeight="25.0" prefWidth="267.0" promptText="輸入城市(英文)" style="-fx-background-radius: 10;" />
+            <VBox alignment="CENTER" layoutX="20.0" layoutY="95.0" prefHeight="157.0" prefWidth="140.0">
+               <children>
+                  <ImageView fx:id="weatherIcon" fitHeight="107.0" fitWidth="126.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../images/cloudy.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="temperatureLabel" alignment="CENTER" prefHeight="27.0" prefWidth="150.0" text="26 C">
+                     <font>
+                        <Font name="Arial Bold" size="24.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="conditionLabel" alignment="CENTER" prefHeight="27.0" prefWidth="159.0" text="多雲">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <FlowPane alignment="CENTER" layoutX="194.0" layoutY="125.0" prefHeight="66.0" prefWidth="151.0">
+               <children>
+                  <ImageView fitHeight="44.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../images/humidity.png" />
+                     </image>
+                  </ImageView>
+                  <VBox alignment="CENTER" prefHeight="45.0" prefWidth="100.0">
+                     <children>
+                        <Label text="降雨機率">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="precipitationProbLabel" text="0%">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+               </children>
+            </FlowPane>
+            <Button fx:id="searchBtn" alignment="CENTER" layoutX="290.0" layoutY="14.0" mnemonicParsing="false" onAction="#searchBtnOnAction" prefHeight="25.0" prefWidth="62.0" style="-fx-background-radius: 10;" text="搜尋">
+               <graphic>
+                  <ImageView fitHeight="17.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../images/search.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <FlowPane alignment="CENTER" layoutX="194.0" layoutY="191.0" prefHeight="66.0" prefWidth="151.0">
+               <children>
+                  <ImageView fitHeight="44.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../images/windspeed.png" />
+                     </image>
+                  </ImageView>
+                  <VBox alignment="CENTER" prefHeight="45.0" prefWidth="100.0">
+                     <children>
+                        <Label text="風速">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="windspeedLabel" text="0 km/h">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+               </children>
+            </FlowPane>
+            <Label fx:id="cityNameLabel" alignment="CENTER" layoutX="117.0" layoutY="61.0" prefHeight="27.0" prefWidth="130.0" text="City Name">
+               <font>
+                  <Font name="Arial Bold" size="20.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <JFXButton fx:id="logoutBtn" layoutX="84.0" layoutY="590.0" onAction="#logoutBtnOnAction" prefHeight="35.0" prefWidth="90.0" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-background-color: #EEEEEE; -fx-border-color: black;" text="登出">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </JFXButton>
    </children>
-</AnchorPane>
+</Pane>

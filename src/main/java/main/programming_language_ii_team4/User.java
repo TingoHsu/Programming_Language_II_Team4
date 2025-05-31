@@ -28,4 +28,10 @@ public class User {
     public static void setGender(String gender) {
         User.gender = gender;
     }
+
+    public static void clearAll() {
+        User.name = null;
+        User.password = null;
+        User.gender = null;
+    }
 }

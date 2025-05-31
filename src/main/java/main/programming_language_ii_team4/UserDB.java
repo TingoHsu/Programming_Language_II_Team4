@@ -25,10 +25,10 @@ public class UserDB {
     }
 
     public void register(String username, String password, String gender) throws Exception {
-        if (username.isEmpty()) throw new UserError("Username can't be empty");
-        if (password.length() != 8) throw new PasswordError("Password should be 8 characters");
-        if (!password.matches(".*[a-zA-Z].*")) throw new PasswordError("Password must contain at least 1 letter");
-        if (!checkUserExist(username) && gender == null) throw new GenderError("Gender isn't selected");
+        if (username.isEmpty()) throw new UserError("帳號名稱不能為空白");
+        if (password.length() != 8) throw new PasswordError("密碼應為8個字");
+        if (!password.matches(".*[a-zA-Z].*")) throw new PasswordError("密碼必須至少包含1個字母");
+        if (!checkUserExist(username) && gender == null) throw new GenderError("尚未選擇性別");
 
         String hash = customHash(password);
 
@@ -43,9 +43,9 @@ public class UserDB {
             stmt.executeUpdate();
         } catch (SQLException e) {
             if (e.getMessage().contains("Duplicate")) {
-                throw new UserError("Username already exists");
+                throw new UserError("用戶名稱已存在");
             }
-            throw new Exception("Database error");
+            throw new Exception("資料庫錯誤");
         }
     }
 
@@ -57,10 +57,10 @@ public class UserDB {
         stmt.setString(1, username);
         ResultSet rs = stmt.executeQuery();
         //check if the username exists
-        if (!rs.next()) throw new UserError("Can't find the user");
+        if (!rs.next()) throw new UserError("找不到使用者");
         String dbHash = rs.getString("password_hash");
         String inputHash = customHash(password);
-        if (!dbHash.equals(inputHash)) throw new PasswordError("Password is wrong");
+        if (!dbHash.equals(inputHash)) throw new PasswordError("密碼錯誤");
         rs.close();
         stmt.close();
     }
@@ -133,6 +133,16 @@ class PasswordError extends Exception {
 }
 class GenderError extends Exception {
     public GenderError(String Error){
+        super(Error);
+    }
+}
+class InputError extends Exception {
+    public InputError(String Error){
+        super(Error);
+    }
+}
+class LocationNotFoundError extends Exception {
+    public LocationNotFoundError(String Error){
         super(Error);
     }
 }

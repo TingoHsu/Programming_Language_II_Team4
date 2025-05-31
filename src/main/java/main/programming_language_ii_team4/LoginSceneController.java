@@ -8,7 +8,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 
-public class LoginFrameController {
+public class LoginSceneController {
     private final UserDB userDB = new UserDB();
     private String gender;
 
@@ -42,7 +42,7 @@ public class LoginFrameController {
             userDB.register(name, pw, gender);
             Alert registerAlert = new Alert(Alert.AlertType.INFORMATION);
             registerAlert.setTitle("Message");
-            registerAlert.setContentText("Registered successfully!");
+            registerAlert.setContentText("註冊成功!");
             registerAlert.showAndWait();
         } catch (Exception e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -58,7 +58,6 @@ public class LoginFrameController {
         String pw = passwordField.getText();
         try {
             userDB.login(name, pw);
-            MainFrameController controller = new MainFrameController();
             User.setName(name);
             User.setPassword(pw);
             User.setGender(gender);
