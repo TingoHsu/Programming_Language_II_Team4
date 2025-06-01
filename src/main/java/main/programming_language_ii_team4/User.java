@@ -1,9 +1,10 @@
 package main.programming_language_ii_team4;
 
 public class User {
-    private static String name;
-    private static String password;
-    private static String gender;
+    private static String name="";
+    private static String password="";
+    private static String gender="";
+    private static String cityInput="";
 
     public static String getName() {
         return name;
@@ -17,6 +18,11 @@ public class User {
         return gender;
     }
 
+    public static String getCityInput() {
+        return cityInput;
+    }
+
+
     public static void setName(String name) {
         User.name = name;
     }
@@ -29,9 +35,14 @@ public class User {
         User.gender = gender;
     }
 
+    public static void setCityInput(String cityInput) {
+        User.cityInput = cityInput;
+    }
+
     public static void clearAll() {
-        User.name = null;
-        User.password = null;
-        User.gender = null;
+        User.name = "";
+        User.password = "";
+        User.gender = "";
+        User.cityInput = "";
     }
 }

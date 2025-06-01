@@ -1,0 +1,10 @@
+.button {
+    -fx-background-color: #EEEEEE;
+    -fx-background-radius: 10;
+    -fx-border-color: black;
+    -fx-border-radius: 10;
+}
+
+.textfield {
+    -fx-background-radius: 10;
+}

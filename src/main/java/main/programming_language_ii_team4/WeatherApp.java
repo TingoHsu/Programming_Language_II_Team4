@@ -23,7 +23,7 @@ public class WeatherApp {
         double longitude = (double) location.get("longitude");
 
         String urlString = "https://api.open-meteo.com/v1/forecast?" +
-                "latitude=" + latitude + "&longitude=" + longitude+
+                "latitude=" + latitude + "&longitude=" + longitude +
                 "&hourly=temperature_2m,weather_code,precipitation_probability,wind_speed_10m&timezone=Asia%2FSingapore";
 
         try {
@@ -53,7 +53,7 @@ public class WeatherApp {
 
                 JSONArray time = (JSONArray) hourly.get("time");
                 
-                int index = findIndexOfCCurrentTime(time);
+                int index = findIndexOfCurrentTime(time);
 
                 JSONArray temperatureData = (JSONArray) hourly.get("temperature_2m");
                 double temperature = (double) temperatureData.get(index);
@@ -88,7 +88,7 @@ public class WeatherApp {
             weatherCondition = "晴朗";
         } else if (weathercode > 0L && weathercode <= 3L) {
             weatherCondition = "多雲";
-        } else if ((weathercode >= 51L && weathercode <= 67L) || (weathercode > 80L && weathercode <= 99L)) {
+        } else if ((weathercode >= 51L && weathercode <= 67L) || (weathercode >= 80L && weathercode <= 99L)) {
             weatherCondition = "降雨";
         } else if (weathercode >= 71L && weathercode <= 77L) {
             weatherCondition = "降雪";
@@ -97,7 +97,7 @@ public class WeatherApp {
         return weatherCondition;
     }
 
-    private static int findIndexOfCCurrentTime(JSONArray timeList) {
+    private static int findIndexOfCurrentTime(JSONArray timeList) {
         String currentTime = getCurrentTime();
 
         for (int i = 0; i < timeList.size(); i++) {

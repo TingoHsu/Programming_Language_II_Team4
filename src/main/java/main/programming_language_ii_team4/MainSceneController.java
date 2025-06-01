@@ -3,6 +3,7 @@ package main.programming_language_ii_team4;
 import com.jfoenix.controls.JFXButton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -11,9 +12,20 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import org.json.simple.JSONObject;
 
+import java.net.URL;
 import java.util.Objects;
+import java.util.ResourceBundle;
 
-public class MainSceneController {
+public class MainSceneController implements Initializable {
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        if (!User.getCityInput().isEmpty()) {
+            cityInput.setText(User.getCityInput());
+            searchBtnOnAction(new ActionEvent());
+        }
+    }
+
     private JSONObject weatherData;
 
     @FXML
@@ -21,6 +33,9 @@ public class MainSceneController {
 
     @FXML
     private JFXButton logoutBtn;
+
+    @FXML
+    private JFXButton profileBtn;
 
     @FXML
     private Label cityNameLabel;
@@ -56,6 +71,7 @@ public class MainSceneController {
     @FXML
     void searchBtnOnAction(ActionEvent event) {
         String input = cityInput.getText();
+        User.setCityInput(input);
 
         try {
             if (input.replaceAll("\\s", "").isEmpty()) {
@@ -110,6 +126,15 @@ public class MainSceneController {
         windspeedLabel.setText(windspeed + " km/h");
 
         cityNameLabel.setText(cityInputCapitalize(input));
+    }
+
+    @FXML
+    void profileBtnOnAction(ActionEvent event) {
+        try {
+            MainStage.changeScene("ProfileScene.fxml");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private String cityInputCapitalize(String cityName) {

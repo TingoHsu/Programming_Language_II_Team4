@@ -12,21 +12,21 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.programming_language_ii_team4.MainSceneController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="600.0" stylesheets="@../../styles/style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.programming_language_ii_team4.MainSceneController">
    <children>
       <Label layoutX="250.0" layoutY="379.0" prefHeight="32.0" prefWidth="99.0" text="風格選擇" textAlignment="JUSTIFY">
          <font>
-            <Font size="24.0" />
+            <Font name="Microsoft YaHei UI" size="24.0" />
          </font>
       </Label>
       <Label layoutX="250.0" layoutY="50.0" prefHeight="32.0" prefWidth="99.0" text="氣象資訊" textAlignment="JUSTIFY">
          <font>
-            <Font size="24.0" />
+            <Font name="Microsoft YaHei UI" size="24.0" />
          </font>
       </Label>
       <Pane layoutX="118.0" layoutY="85.0" prefHeight="265.0" prefWidth="364.0">
          <children>
-            <TextField fx:id="cityInput" layoutX="14.0" layoutY="14.0" prefHeight="25.0" prefWidth="267.0" promptText="輸入城市(英文)" style="-fx-background-radius: 10;" />
+            <TextField fx:id="cityInput" layoutX="14.0" layoutY="14.0" prefHeight="25.0" prefWidth="267.0" promptText="輸入城市(英文)" styleClass="textfield" />
             <VBox alignment="CENTER" layoutX="20.0" layoutY="95.0" prefHeight="157.0" prefWidth="140.0">
                <children>
                   <ImageView fx:id="weatherIcon" fitHeight="107.0" fitWidth="126.0" pickOnBounds="true" preserveRatio="true">
@@ -69,7 +69,7 @@
                   </VBox>
                </children>
             </FlowPane>
-            <Button fx:id="searchBtn" alignment="CENTER" layoutX="290.0" layoutY="14.0" mnemonicParsing="false" onAction="#searchBtnOnAction" prefHeight="25.0" prefWidth="62.0" style="-fx-background-radius: 10;" text="搜尋">
+            <Button fx:id="searchBtn" alignment="CENTER" layoutX="290.0" layoutY="14.0" mnemonicParsing="false" onAction="#searchBtnOnAction" prefHeight="27.0" prefWidth="64.0" text="搜尋">
                <graphic>
                   <ImageView fitHeight="17.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -111,10 +111,21 @@
             </Label>
          </children>
       </Pane>
-      <JFXButton fx:id="logoutBtn" layoutX="84.0" layoutY="590.0" onAction="#logoutBtnOnAction" prefHeight="35.0" prefWidth="90.0" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-background-color: #EEEEEE; -fx-border-color: black;" text="登出">
+      <JFXButton fx:id="logoutBtn" layoutX="73.0" layoutY="590.0" onAction="#logoutBtnOnAction" prefHeight="35.0" prefWidth="90.0" stylesheets="@../../styles/style.css" text="登出">
          <font>
             <Font size="16.0" />
          </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <JFXButton fx:id="profileBtn" layoutX="437.0" layoutY="590.0" onAction="#profileBtnOnAction" prefHeight="35.0" prefWidth="90.0" stylesheets="@../../styles/style.css" text="個人檔案">
+         <font>
+            <Font size="16.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </JFXButton>
    </children>
 </Pane>

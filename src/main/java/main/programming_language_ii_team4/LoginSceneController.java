@@ -41,12 +41,14 @@ public class LoginSceneController {
             checkGenderSelection();
             userDB.register(name, pw, gender);
             Alert registerAlert = new Alert(Alert.AlertType.INFORMATION);
-            registerAlert.setTitle("Message");
+            registerAlert.setTitle("訊息");
+            registerAlert.setHeaderText("訊息");
             registerAlert.setContentText("註冊成功!");
             registerAlert.showAndWait();
         } catch (Exception e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle(e.getClass().getName());
+            alert.setHeaderText("錯誤");
             alert.setContentText(e.getMessage());
             alert.showAndWait();
         }
@@ -60,11 +62,17 @@ public class LoginSceneController {
             userDB.login(name, pw);
             User.setName(name);
             User.setPassword(pw);
-            User.setGender(gender);
+            if (gender != null) {
+                User.setGender(gender);
+            } else {
+                User.setGender(userDB.getUserGender(name));
+            }
+
             MainStage.changeScene("MainScene.fxml");
         } catch (Exception e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle(e.getClass().getName());
+            alert.setHeaderText("錯誤");
             alert.setContentText(e.getMessage());
             alert.showAndWait();
         }

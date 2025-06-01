@@ -65,6 +65,62 @@ public class UserDB {
         stmt.close();
     }
 
+    public void setName(String oldName, String newName) throws Exception {
+        if (newName.isEmpty()) throw new UserError("帳號名稱不能為空白");
+        if (checkUserExist(newName)) throw new UserError("用戶名稱已存在");
+        String query = "UPDATE users SET username = ? WHERE username = ?";
+        try {
+            PreparedStatement stmt = conn.prepareStatement(query);
+            stmt = conn.prepareStatement(query);
+            stmt.setString(1, newName);
+            stmt.setString(2, oldName);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public void setPassword(String oldPassword, String newPassword) throws Exception {
+        if (newPassword.length() != 8) throw new PasswordError("密碼應為8個字");
+        if (!newPassword.matches(".*[a-zA-Z].*")) throw new PasswordError("密碼必須至少包含1個字母");
+        String query = "UPDATE users SET password_hash = ? WHERE password_hash = ?";
+        try {
+            PreparedStatement stmt = conn.prepareStatement(query);
+            stmt = conn.prepareStatement(query);
+            stmt.setString(1, customHash(newPassword));
+            stmt.setString(2, customHash(oldPassword));
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void setGender(String name, String newGender) throws Exception {
+        if (newGender == null) throw new GenderError("尚未選擇性別");
+        String query = "UPDATE users SET gender = ? WHERE username = ?";
+
+        try {
+            PreparedStatement stmt = conn.prepareStatement(query);
+            stmt = conn.prepareStatement(query);
+            stmt.setString(1, newGender);
+            stmt.setString(2, name);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void delete(String name) {
+        String query = "DELETE FROM users WHERE username = ?";
+        try {
+            PreparedStatement stmt = conn.prepareStatement(query);
+            stmt = conn.prepareStatement(query);
+            stmt.setString(1, name);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public String customHash(String pw){
         StringBuilder sb = new StringBuilder(pw);
         for (int i=0; i<sb.length(); i++) {
@@ -115,6 +171,24 @@ public class UserDB {
             stmt.close();
             rs.close();
             return exist;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public String getUserGender(String name) {
+        String gender = "";
+        String query = "SELECT gender FROM users WHERE username = ?";
+        try {
+            PreparedStatement stmt = conn.prepareStatement(query);
+            stmt.setString(1, name);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                gender = rs.getString("gender");
+            }
+            stmt.close();
+            rs.close();
+            return gender;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

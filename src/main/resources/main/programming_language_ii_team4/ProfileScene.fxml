@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXRadioButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ColorPicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="600.0" stylesheets="@../../styles/style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.programming_language_ii_team4.ProfileSceneController">
+    <children>
+        <Label layoutX="228.0" layoutY="40.0" prefHeight="39.0" prefWidth="144.0" text="個人檔案設定" textAlignment="CENTER">
+            <font>
+                <Font size="24.0" />
+            </font>
+        </Label>
+      <VBox layoutX="40.0" layoutY="90.0" prefHeight="570.0" prefWidth="520.0" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: black; -fx-background-color: #EEEEEE;">
+         <children>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="207.0" prefWidth="514.0" style="-fx-border-color: black; -fx-border-radius: 10; -fx-background-color: #EEEEEE; -fx-background-radius: 10;">
+               <children>
+                  <GridPane layoutX="155.0" layoutY="34.0" prefHeight="138.0" prefWidth="309.0" AnchorPane.leftAnchor="155.0" AnchorPane.rightAnchor="5.0">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="241.0" minWidth="10.0" prefWidth="82.4000244140625" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="366.0" minWidth="-Infinity" prefWidth="232.7999755859375" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                     <children>
+                        <Label prefHeight="35.0" prefWidth="106.0" text="帳號名稱" GridPane.halignment="LEFT">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="nameLabel" prefHeight="35.0" prefWidth="120.0" text="(帳號)" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label prefHeight="35.0" prefWidth="87.0" text="密碼" GridPane.halignment="LEFT" GridPane.rowIndex="1">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="passwordLabel" prefHeight="35.0" prefWidth="120.0" text="(密碼)" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label prefHeight="35.0" prefWidth="87.0" text="性別" GridPane.rowIndex="2">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="genderLabel" prefHeight="35.0" prefWidth="120.0" text="(性別)" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </GridPane>
+                  <ImageView fitHeight="100.0" fitWidth="110.0" layoutX="31.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../images/user.png" />
+                     </image></ImageView>
+               </children>
+            </AnchorPane>
+            <VBox prefHeight="362.0" prefWidth="506.0" spacing="3.0">
+               <children>
+                  <Label prefHeight="23.0" prefWidth="110.0" text="更改帳號名稱:">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <FlowPane hgap="10.0" prefHeight="27.0" prefWidth="469.0">
+                     <children>
+                        <TextField fx:id="nameChangeField" prefHeight="23.0" prefWidth="144.0" styleClass="textfield" />
+                        <JFXButton fx:id="nameChangeBtn" onAction="#nameChangeBtnOnAction" text="確認" />
+                     </children>
+                  </FlowPane>
+                  <Label prefHeight="23.0" prefWidth="88.0" text="更改密碼:">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <FlowPane hgap="10.0" prefHeight="27.0" prefWidth="469.0">
+                     <children>
+                        <TextField fx:id="passwordChangeField" prefHeight="23.0" prefWidth="144.0" styleClass="textfield" />
+                        <JFXButton fx:id="passwordChangeBtn" onAction="#passwordChangeBtnOnAction" text="確認" />
+                     </children>
+                  </FlowPane>
+                  <Label layoutX="20.0" layoutY="80.0" prefHeight="23.0" prefWidth="88.0" text="更改性別:">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <FlowPane hgap="28.0" layoutX="20.0" layoutY="108.0" prefHeight="27.0" prefWidth="469.0">
+                     <children>
+                        <JFXRadioButton fx:id="maleBtn" text="男">
+                           <selectedColor>
+                              <Color red="0.021052632480859756" green="0.021052632480859756" blue="0.021052632480859756" />
+                           </selectedColor>
+                           <font>
+                              <Font name="Microsoft Sans Serif" size="18.0" />
+                           </font>
+                           <toggleGroup>
+                              <ToggleGroup fx:id="genderBtnGroup" />
+                           </toggleGroup>
+                        </JFXRadioButton>
+                        <JFXRadioButton fx:id="femaleBtn" text="女" toggleGroup="$genderBtnGroup">
+                           <selectedColor>
+                              <Color red="0.021052632480859756" green="0.021052632480859756" blue="0.021052632480859756" />
+                           </selectedColor>
+                           <font>
+                              <Font name="Microsoft Sans Serif" size="18.0" />
+                           </font>
+                        </JFXRadioButton>
+                        <JFXButton fx:id="genderChangeBtn" onAction="#genderChangeBtnOnAction" text="確認">
+                           <FlowPane.margin>
+                              <Insets />
+                           </FlowPane.margin>
+                        </JFXButton>
+                     </children>
+                  </FlowPane>
+                  <Label prefHeight="24.0" prefWidth="119.0" text="更改背景顏色">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <ColorPicker styleClass="button" />
+                  <FlowPane alignment="CENTER_LEFT" hgap="349.0" prefHeight="35.0" prefWidth="508.0">
+                     <children>
+                        <JFXButton fx:id="deleteAccBtn" alignment="CENTER" onAction="#deleteAccBtnOnAction" prefHeight="35.0" prefWidth="82.0" stylesheets="@../../styles/style.css" text="刪除帳號" textFill="RED">
+                           <FlowPane.margin>
+                              <Insets />
+                           </FlowPane.margin>
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </JFXButton>
+                        <JFXButton fx:id="backBtn" onAction="#backBtnOnAction" prefHeight="35.0" prefWidth="65.0" stylesheets="@../../styles/style.css" text="返回">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </JFXButton>
+                     </children>
+                     <VBox.margin>
+                        <Insets top="70.0" />
+                     </VBox.margin>
+                  </FlowPane>
+               </children>
+               <padding>
+                  <Insets left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </VBox>
+         </children>
+      </VBox>
+      <ImageView fitHeight="35.0" fitWidth="51.0" layoutX="372.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../images/settings.png" />
+         </image></ImageView>
+    </children>
+</Pane>
