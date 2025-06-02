@@ -1,0 +1,59 @@
+.root {
+    -fx-background-color: white;
+}
+
+.text {
+    -fx-text-fill: black;
+}
+
+.jfx-toggle-button {
+
+}
+
+.button {
+    -fx-background-color: #EEEEEE;
+    -fx-background-radius: 10;
+    -fx-border-color: black;
+    -fx-border-radius: 10;
+}
+
+.jfx-button {
+
+}
+
+.jfx-radio-button {
+
+}
+
+.jfx-radio-button:selected .radio {
+
+}
+
+.textfield {
+    -fx-background-radius: 10;
+}
+
+.frame {
+    -fx-background-color: #EEEEEE;
+    -fx-background-radius: 10;
+    -fx-border-color: black;
+    -fx-border-radius: 10;
+    -fx-border-width: 1;
+}
+
+.recommendpage-upper-border {
+    -fx-border-width: 1 0 0 0;
+    -fx-border-color: black transparent transparent transparent;
+}
+
+.recommendpage-toggle-button {
+       -fx-background-color: #EEEEEE;
+       -fx-background-radius: 10;
+       -fx-border-color: black;
+       -fx-border-radius: 10;
+}
+
+.recommendpage-toggle-button:selected {
+       -fx-background-color: #A6A6A6;
+}
+

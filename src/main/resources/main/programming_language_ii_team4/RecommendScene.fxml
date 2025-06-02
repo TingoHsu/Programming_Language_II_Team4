@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="600.0" styleClass="root" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.programming_language_ii_team4.RecommendSceneController">
+   <children>
+      <GridPane hgap="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="581.0" prefWidth="600.0" vgap="10.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <VBox alignment="BOTTOM_CENTER" prefHeight="318.0" prefWidth="284.0" spacing="5.0" styleClass="frame">
+               <children>
+                  <Label fx:id="upperLabel" styleClass="text" text="Upper">
+                     <font>
+                        <Font name="Microsoft YaHei UI" size="23.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </Label>
+                  <Pane prefHeight="235.0" prefWidth="282.0" styleClass="recommendpage-upper-border">
+                     <children>
+                        <ImageView fx:id="upperImageView" fitHeight="170.0" fitWidth="241.0" layoutX="14.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true" />
+                        <VBox alignment="CENTER" layoutX="253.0" prefHeight="234.0" prefWidth="30.0">
+                           <children>
+                              <ToggleButton mnemonicParsing="false" prefHeight="80.0" prefWidth="30.0" selected="true" styleClass="recommendpage-toggle-button" text="1">
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="upperBtnGroup" />
+                                 </toggleGroup>
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </ToggleButton>
+                              <ToggleButton layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="30.0" styleClass="recommendpage-toggle-button" text="2" toggleGroup="$upperBtnGroup">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </ToggleButton>
+                              <ToggleButton layoutX="10.0" layoutY="81.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="30.0" styleClass="recommendpage-toggle-button" text="3" toggleGroup="$upperBtnGroup">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </ToggleButton>
+                           </children>
+                        </VBox>
+                     </children>
+                  </Pane>
+               </children>
+            </VBox>
+            <VBox alignment="BOTTOM_CENTER" layoutX="20.0" layoutY="20.0" prefHeight="200.0" prefWidth="100.0" spacing="4.0" styleClass="frame" GridPane.columnIndex="1">
+               <children>
+                  <Label fx:id="lowerLabel" styleClass="text" text="Lower">
+                     <font>
+                        <Font name="Microsoft YaHei UI" size="23.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets top="5.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Pane prefHeight="314.0" prefWidth="282.0" styleClass="recommendpage-upper-border">
+                     <children>
+                        <ImageView fx:id="lowerImageView" fitHeight="170.0" fitWidth="241.0" layoutX="14.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true" />
+                        <VBox layoutX="253.0" prefHeight="234.0" prefWidth="30.0">
+                           <children>
+                              <ToggleButton mnemonicParsing="false" prefHeight="80.0" prefWidth="30.0" selected="true" styleClass="recommendpage-toggle-button" text="1">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="lowerBtnGroup" />
+                                 </toggleGroup>
+                              </ToggleButton>
+                              <ToggleButton layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="30.0" styleClass="recommendpage-toggle-button" text="2" toggleGroup="$lowerBtnGroup">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </ToggleButton>
+                              <ToggleButton layoutX="10.0" layoutY="81.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="30.0" styleClass="recommendpage-toggle-button" text="3" toggleGroup="$lowerBtnGroup">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </ToggleButton>
+                           </children>
+                        </VBox>
+                     </children>
+                  </Pane>
+               </children>
+            </VBox>
+            <VBox alignment="BOTTOM_CENTER" layoutX="20.0" layoutY="20.0" prefHeight="200.0" prefWidth="100.0" spacing="4.0" styleClass="frame" GridPane.rowIndex="1">
+               <children>
+                  <Label fx:id="shoesLabel" styleClass="text" text="Shoes">
+                     <font>
+                        <Font name="Microsoft YaHei UI" size="23.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets top="5.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Pane prefHeight="319.0" prefWidth="282.0" styleClass="recommendpage-upper-border">
+                     <children>
+                        <ImageView fx:id="shoesImageView" fitHeight="170.0" fitWidth="241.0" layoutX="14.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true" />
+                        <VBox layoutX="253.0" prefHeight="234.0" prefWidth="30.0">
+                           <children>
+                              <ToggleButton mnemonicParsing="false" prefHeight="80.0" prefWidth="30.0" selected="true" styleClass="recommendpage-toggle-button" text="1">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="shoesBtnGroup" />
+                                 </toggleGroup>
+                              </ToggleButton>
+                              <ToggleButton layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="30.0" styleClass="recommendpage-toggle-button" text="2" toggleGroup="$shoesBtnGroup">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </ToggleButton>
+                              <ToggleButton layoutX="10.0" layoutY="81.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="30.0" styleClass="recommendpage-toggle-button" text="3" toggleGroup="$shoesBtnGroup">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </ToggleButton>
+                           </children>
+                        </VBox>
+                     </children>
+                  </Pane>
+               </children>
+            </VBox>
+            <VBox alignment="BOTTOM_CENTER" layoutX="20.0" layoutY="20.0" prefHeight="200.0" prefWidth="100.0" spacing="4.0" styleClass="frame" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <children>
+                  <Label fx:id="accessoryLabel" styleClass="text" text="Accessory">
+                     <font>
+                        <Font name="Microsoft YaHei UI" size="23.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets top="5.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Pane prefHeight="270.0" prefWidth="282.0" styleClass="recommendpage-upper-border">
+                     <children>
+                        <ImageView fx:id="accessoryImageView" fitHeight="170.0" fitWidth="241.0" layoutX="14.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true" />
+                        <VBox layoutX="253.0" prefHeight="234.0" prefWidth="30.0">
+                           <children>
+                              <ToggleButton mnemonicParsing="false" prefHeight="80.0" prefWidth="30.0" selected="true" styleClass="recommendpage-toggle-button" text="1">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="accessoryBtnGroup" />
+                                 </toggleGroup>
+                              </ToggleButton>
+                              <ToggleButton layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="30.0" styleClass="recommendpage-toggle-button" text="2" toggleGroup="$accessoryBtnGroup">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </ToggleButton>
+                              <ToggleButton layoutX="10.0" layoutY="81.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="30.0" styleClass="recommendpage-toggle-button" text="3" toggleGroup="$accessoryBtnGroup">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </ToggleButton>
+                           </children>
+                        </VBox>
+                     </children>
+                  </Pane>
+               </children>
+            </VBox>
+         </children>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </GridPane>
+      <FlowPane alignment="CENTER" hgap="360.0" layoutX="24.0" layoutY="632.0" prefHeight="39.0" prefWidth="552.0">
+         <children>
+            <JFXButton onAction="#refreshBtnOnAction" styleClass="jfx-button" text="刷新圖片">
+               <font>
+                  <Font size="16.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+            <JFXButton layoutX="226.0" layoutY="10.0" onAction="#backBtnOnAction" styleClass="jfx-button" text="返回">
+               <font>
+                  <Font size="16.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+         </children></FlowPane>
+   </children>
+</Pane>

@@ -35,7 +35,7 @@ public class UserDB {
         //write the sql query to insert user information into the table
         //hint: use PreparedStatement and executeUpdate() to complete the insertion
 
-        String query = "INSERT INTO users (username, password_hash, gender) VALUES (?, ?, ?)";
+        String query = "INSERT INTO users (username, password_hash, gender, color) VALUES (?, ?, ?, \"white\")";
         try (PreparedStatement stmt = conn.prepareStatement(query)) {
             stmt.setString(1, username);
             stmt.setString(2, hash);
@@ -71,7 +71,6 @@ public class UserDB {
         String query = "UPDATE users SET username = ? WHERE username = ?";
         try {
             PreparedStatement stmt = conn.prepareStatement(query);
-            stmt = conn.prepareStatement(query);
             stmt.setString(1, newName);
             stmt.setString(2, oldName);
             stmt.executeUpdate();
@@ -85,7 +84,6 @@ public class UserDB {
         String query = "UPDATE users SET password_hash = ? WHERE password_hash = ?";
         try {
             PreparedStatement stmt = conn.prepareStatement(query);
-            stmt = conn.prepareStatement(query);
             stmt.setString(1, customHash(newPassword));
             stmt.setString(2, customHash(oldPassword));
             stmt.executeUpdate();
@@ -100,7 +98,6 @@ public class UserDB {
 
         try {
             PreparedStatement stmt = conn.prepareStatement(query);
-            stmt = conn.prepareStatement(query);
             stmt.setString(1, newGender);
             stmt.setString(2, name);
             stmt.executeUpdate();
@@ -113,7 +110,6 @@ public class UserDB {
         String query = "DELETE FROM users WHERE username = ?";
         try {
             PreparedStatement stmt = conn.prepareStatement(query);
-            stmt = conn.prepareStatement(query);
             stmt.setString(1, name);
             stmt.executeUpdate();
         } catch (SQLException e) {
@@ -163,11 +159,7 @@ public class UserDB {
             PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setString(1, name);
             ResultSet rs = stmt.executeQuery();
-            if (rs.next()) {
-                exist = true;
-            } else {
-                exist = false;
-            }
+            exist = rs.next();
             stmt.close();
             rs.close();
             return exist;
@@ -189,6 +181,160 @@ public class UserDB {
             stmt.close();
             rs.close();
             return gender;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public String getUpper() {
+        String query = "SELECT * FROM clothes WHERE TempMin < ? AND TempMax >= ? AND style = ? AND type = \"top\"";
+        try {
+            PreparedStatement stmt = conn.prepareStatement(query);
+            stmt.setDouble(1, User.getTemperature());
+            stmt.setDouble(2, User.getTemperature());
+            stmt.setString(3, User.getStyle());
+            ResultSet rs = stmt.executeQuery();
+            String clothing="";
+            while (rs.next()) {
+                if (rs.getString("Gender") != null) {
+                    if (rs.getString("Gender").equals(User.getGender())) {
+                        clothing = rs.getString("clothing_item");
+                        break;
+                    }
+                } else {
+                    clothing = rs.getString("clothing_item");
+                    break;
+                }
+            }
+            stmt.close();
+            rs.close();
+            return clothing;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    public String getLower() {
+        String query = "SELECT * FROM clothes WHERE TempMin < ? AND TempMax >= ? AND style = ? AND type = \"bottom\"";
+        try {
+            PreparedStatement stmt = conn.prepareStatement(query);
+            stmt.setDouble(1, User.getTemperature());
+            stmt.setDouble(2, User.getTemperature());
+            stmt.setString(3, User.getStyle());
+            ResultSet rs = stmt.executeQuery();
+            String clothing="";
+            while (rs.next()) {
+                if (rs.getString("Gender") != null) {
+                    if (rs.getString("Gender").equals(User.getGender())) {
+                        clothing = rs.getString("clothing_item");
+                        break;
+                    }
+                } else {
+                    clothing = rs.getString("clothing_item");
+                    break;
+                }
+            }
+            stmt.close();
+            rs.close();
+            return clothing;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    public String getShoes() {
+        String query = "SELECT * FROM OutfitRules WHERE TempMin < ? AND TempMax >= ? AND RainMin <= ? AND RainMax >= ? AND style = ?";
+        try {
+            PreparedStatement stmt = conn.prepareStatement(query);
+            stmt.setDouble(1, User.getTemperature());
+            stmt.setDouble(2, User.getTemperature());
+            stmt.setLong(3, User.getPrecipitationProb());
+            stmt.setLong(4, User.getPrecipitationProb());
+            stmt.setString(5, User.getStyle());
+            ResultSet rs = stmt.executeQuery();
+            String shoes="";
+            while (rs.next()) {
+                if (rs.getString("Gender") != null) {
+                    if (rs.getString("Gender").equals(User.getGender())) {
+                        shoes = rs.getString("Shoes");
+                        break;
+                    }
+                } else {
+                    shoes = rs.getString("Shoes");
+                    break;
+                }
+            }
+            stmt.close();
+            rs.close();
+            return shoes;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    public String getAccessory() {
+        String query = "SELECT * FROM OutfitRules WHERE TempMin < ? AND TempMax >= ? AND RainMin <= ? AND RainMax >= ? AND style = ?";
+        try {
+            PreparedStatement stmt = conn.prepareStatement(query);
+            stmt.setDouble(1, User.getTemperature());
+            stmt.setDouble(2, User.getTemperature());
+            stmt.setLong(3, User.getPrecipitationProb());
+            stmt.setLong(4, User.getPrecipitationProb());
+            stmt.setString(5, User.getStyle());
+            ResultSet rs = stmt.executeQuery();
+            String accessory="";
+            while (rs.next()) {
+                if (rs.getString("Gender") != null) {
+                    if (rs.getString("Gender").equals(User.getGender())) {
+                        accessory = rs.getString("Accessory");
+                        break;
+                    }
+                } else {
+                        accessory = rs.getString("Accessory");
+                        break;
+                }
+            }
+            stmt.close();
+            rs.close();
+            return accessory;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    public String getColor() {
+        String color = "";
+        String query = "SELECT Color FROM users WHERE username = ?";
+        try {
+            PreparedStatement stmt = conn.prepareStatement(query);
+            stmt.setString(1, User.getName());
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                color = rs.getString("Color");
+            }
+            stmt.close();
+            rs.close();
+            return color;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void updateColor() {
+        String query = "UPDATE users SET Color = ? WHERE username = ?";
+        try {
+            PreparedStatement stmt = conn.prepareStatement(query);
+            stmt.setString(1, User.getBackground());
+            stmt.setString(2, User.getName());
+            stmt.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -217,6 +363,11 @@ class InputError extends Exception {
 }
 class LocationNotFoundError extends Exception {
     public LocationNotFoundError(String Error){
+        super(Error);
+    }
+}
+class ToggleButtonError extends Exception {
+    public ToggleButtonError(String Error){
         super(Error);
     }
 }

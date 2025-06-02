@@ -1,0 +1,62 @@
+.root {
+    -fx-background-color: #393937;
+}
+
+.text {
+    -fx-text-fill: #DBDBD9;
+}
+
+.jfx-toggle-button {
+    -fx-text-fill: #DBDBD9;
+    -jfx-toggle-color: #DEF03C;
+    -jfx-toggle-line-color: #6D7900;
+}
+
+.button {
+    -fx-background-color: #EEEEEE;
+    -fx-background-radius: 10;
+    -fx-border-color: black;
+    -fx-border-radius: 10;
+}
+
+.jfx-button {
+    -fx-background-color: #EEEEEE;
+}
+
+.jfx-radio-button {
+    -fx-text-fill: #DBDBD9;
+}
+
+.jfx-radio-button:selected .radio {
+    -fx-fill: #EEEEEE;
+}
+
+.textfield {
+    -fx-background-radius: 10;
+    -fx-background-color: #A2A3A2;
+    -fx-prompt-text-fill: #FFFFFF;
+}
+
+.frame {
+    -fx-background-color: #4E4E48;
+    -fx-background-radius: 10;
+    -fx-border-color: #A2A297;
+    -fx-border-radius: 10;
+    -fx-border-width: 1;
+}
+
+.recommendpage-upper-border {
+    -fx-border-width: 1 0 0 0;
+    -fx-border-color: black transparent transparent transparent;
+}
+
+.recommendpage-toggle-button {
+       -fx-background-color: #EEEEEE;
+       -fx-background-radius: 10;
+       -fx-border-color: black;
+       -fx-border-radius: 10;
+}
+
+.recommendpage-toggle-button:selected {
+       -fx-background-color: #A6A6A6;
+}

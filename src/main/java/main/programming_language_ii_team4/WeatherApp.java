@@ -15,16 +15,7 @@ import java.util.Scanner;
 public class WeatherApp {
     public static JSONObject getWeatherData(String locationName) throws LocationNotFoundError {
         JSONArray locationData = getLocationData(locationName);
-        if (locationData == null) {
-            throw new LocationNotFoundError("找不到此城市");
-        }
-        JSONObject location = (JSONObject) locationData.getFirst();
-        double latitude = (double) location.get("latitude");
-        double longitude = (double) location.get("longitude");
-
-        String urlString = "https://api.open-meteo.com/v1/forecast?" +
-                "latitude=" + latitude + "&longitude=" + longitude +
-                "&hourly=temperature_2m,weather_code,precipitation_probability,wind_speed_10m&timezone=Asia%2FSingapore";
+        String urlString = getString(locationData);
 
         try {
             HttpURLConnection conn = fetchApiResponse(urlString);
@@ -82,6 +73,19 @@ public class WeatherApp {
         return null;
     }
 
+    private static String getString(JSONArray locationData) throws LocationNotFoundError {
+        if (locationData == null) {
+            throw new LocationNotFoundError("找不到此城市");
+        }
+        JSONObject location = (JSONObject) locationData.getFirst();
+        double latitude = (double) location.get("latitude");
+        double longitude = (double) location.get("longitude");
+
+        return "https://api.open-meteo.com/v1/forecast?" +
+                "latitude=" + latitude + "&longitude=" + longitude +
+                "&hourly=temperature_2m,weather_code,precipitation_probability,wind_speed_10m&timezone=Asia%2FSingapore";
+    }
+
     private static String convertWeatherCode(long weathercode) {
         String weatherCondition = "";
         if (weathercode == 0L) {
@@ -113,9 +117,7 @@ public class WeatherApp {
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH':00'");
 
-        String formattedDateTime = currentDateTime.format(formatter);
-
-        return formattedDateTime;
+        return currentDateTime.format(formatter);
     }
 
     private static JSONArray getLocationData(String locationName) {
@@ -146,9 +148,8 @@ public class WeatherApp {
 
                 JSONParser parser = new JSONParser();
                 JSONObject resultJsonObj = (JSONObject) parser.parse(String.valueOf(resultJson));
-                JSONArray locationData = (JSONArray) resultJsonObj.get("results");
 
-                return locationData;
+                return (JSONArray) resultJsonObj.get("results");
             }
         } catch (Exception e) {
             e.printStackTrace();

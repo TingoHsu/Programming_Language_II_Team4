@@ -27,6 +27,10 @@ public class MainStage extends Application {
     public static void changeScene(String fxmlFile) throws Exception {
         FXMLLoader loader = new FXMLLoader(MainStage.class.getResource(fxmlFile));
         Scene scene = new Scene(loader.load(), 600, 700);
+        if (fxmlFile != "LoginScene.fxml") {
+            scene.getStylesheets().clear();
+            scene.getStylesheets().add(MainStage.class.getResource("/styles/" + User.getBackground() + ".css").toExternalForm());
+        }
         primaryStage.setScene(scene);
     }
 }

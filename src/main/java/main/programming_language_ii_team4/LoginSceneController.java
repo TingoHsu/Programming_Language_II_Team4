@@ -13,12 +13,6 @@ public class LoginSceneController {
     private String gender;
 
     @FXML
-    private JFXButton LoginBtn;
-
-    @FXML
-    private JFXButton enrollBtn;
-
-    @FXML
     private JFXRadioButton femaleBtn;
 
     @FXML
@@ -32,6 +26,7 @@ public class LoginSceneController {
 
     @FXML
     private TextField usernameField;
+
 
     @FXML
     void enrollBtnOnAction(ActionEvent event) {
@@ -62,6 +57,7 @@ public class LoginSceneController {
             userDB.login(name, pw);
             User.setName(name);
             User.setPassword(pw);
+            User.setBackground(userDB.getColor());
             if (gender != null) {
                 User.setGender(gender);
             } else {

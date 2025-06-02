@@ -1,13 +1,11 @@
 package main.programming_language_ii_team4;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXToggleButton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import org.json.simple.JSONObject;
@@ -17,25 +15,13 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class MainSceneController implements Initializable {
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        if (!User.getCityInput().isEmpty()) {
-            cityInput.setText(User.getCityInput());
-            searchBtnOnAction(new ActionEvent());
-        }
-    }
-
     private JSONObject weatherData;
 
     @FXML
+    private JFXToggleButton casualBtn;
+
+    @FXML
     private TextField cityInput;
-
-    @FXML
-    private JFXButton logoutBtn;
-
-    @FXML
-    private JFXButton profileBtn;
 
     @FXML
     private Label cityNameLabel;
@@ -44,19 +30,31 @@ public class MainSceneController implements Initializable {
     private Label conditionLabel;
 
     @FXML
-    private Label temperatureLabel;
+    private JFXToggleButton formalBtn;
+
+    @FXML
+    private TextField lowerColorField;
 
     @FXML
     private Label precipitationProbLabel;
 
     @FXML
-    private Label windspeedLabel;
+    private JFXToggleButton sportsBtn;
 
     @FXML
-    private Button searchBtn;
+    private ToggleGroup styleBtnGroup;
+
+    @FXML
+    private Label temperatureLabel;
+
+    @FXML
+    private TextField upperColorField;
 
     @FXML
     private ImageView weatherIcon;
+
+    @FXML
+    private Label windspeedLabel;
 
     @FXML
     void logoutBtnOnAction(ActionEvent event) {
@@ -79,7 +77,8 @@ public class MainSceneController implements Initializable {
             }
         } catch (Exception e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle(e.getClass().getName());
+            alert.setTitle("錯誤");
+            alert.setHeaderText("錯誤");
             alert.setContentText(e.getMessage());
             alert.showAndWait();
         }
@@ -88,7 +87,8 @@ public class MainSceneController implements Initializable {
             weatherData = WeatherApp.getWeatherData(input);
         } catch (Exception e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle(e.getClass().getName());
+            alert.setTitle("錯誤");
+            alert.setHeaderText("錯誤");
             alert.setContentText(e.getMessage());
             alert.showAndWait();
         }
@@ -114,16 +114,21 @@ public class MainSceneController implements Initializable {
                 break;
         }
 
+        User.setWeatherCondition(weatherCondition);
+
         double temperature = (double) weatherData.get("temperature");
         temperatureLabel.setText(temperature + " C");
+        User.setTemperature(temperature);
 
         conditionLabel.setText(weatherCondition);
 
         long precipitationProb = (long) weatherData.get("precipitation_probability") ;
         precipitationProbLabel.setText(precipitationProb + "%");
+        User.setPrecipitationProb(precipitationProb);
 
         double windspeed = (double) weatherData.get("windspeed");
         windspeedLabel.setText(windspeed + " km/h");
+        User.setWindspeed(windspeed);
 
         cityNameLabel.setText(cityInputCapitalize(input));
     }
@@ -131,9 +136,47 @@ public class MainSceneController implements Initializable {
     @FXML
     void profileBtnOnAction(ActionEvent event) {
         try {
+            String style = getStyleSelection();
+            String upperColor = upperColorField.getText();
+            String lowerColor = lowerColorField.getText();
+            User.setStyle(style);
+            User.setUpperColor(upperColor);
+            User.setLowerColor(lowerColor);
             MainStage.changeScene("ProfileScene.fxml");
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    @FXML
+    void recommendBtnOnAction(ActionEvent event) {
+        try {
+            String style = getStyleSelection();
+            if (style.isEmpty()) throw new ToggleButtonError("請選擇風格");
+            String upperColor = upperColorField.getText();
+            String lowerColor = lowerColorField.getText();
+            User.setStyle(style);
+            User.setUpperColor(upperColor);
+            User.setLowerColor(lowerColor);
+            MainStage.changeScene("RecommendScene.fxml");
+        } catch (Exception e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("錯誤");
+            alert.setHeaderText("錯誤");
+            alert.setContentText(e.getMessage());
+            alert.showAndWait();
+        }
+    }
+
+    private String getStyleSelection() {
+        if (casualBtn.isSelected()) {
+            return "casual";
+        } else if (formalBtn.isSelected()) {
+            return "formal";
+        } else if (sportsBtn.isSelected()) {
+            return "sports";
+        } else {
+            return "";
         }
     }
 
@@ -143,7 +186,7 @@ public class MainSceneController implements Initializable {
         StringBuilder capitalized = new StringBuilder();
 
         for (String word : words) {
-            if (word.length() > 0) {
+            if (!word.isEmpty()) {
                 capitalized.append(Character.toUpperCase(word.charAt(0)))
                         .append(word.substring(1))
                         .append(" ");
@@ -157,4 +200,58 @@ public class MainSceneController implements Initializable {
         return Objects.requireNonNull(getClass().getResource("/images/" + fileName)).toExternalForm();
     }
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        upperColorField.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue.length() > 3) {
+                upperColorField.setText(oldValue);
+            }
+        });
+        lowerColorField.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue.length() > 3) {
+                lowerColorField.setText(oldValue);
+            }
+        });
+
+        if (!User.getCityInput().isEmpty()) {
+            switch (User.getWeatherCondition()) {
+                case "晴朗":
+                    Image clearImage = new Image(imagePathBuilder("clear.png"));
+                    weatherIcon.setImage(clearImage);
+                    break;
+                case "多雲":
+                    Image cloudyImage = new Image(imagePathBuilder("cloudy.png"));
+                    weatherIcon.setImage(cloudyImage);
+                    break;
+                case "降雨":
+                    Image rainImage = new Image(imagePathBuilder("rain.png"));
+                    weatherIcon.setImage(rainImage);
+                    break;
+                case "降雪":
+                    Image snowImage = new Image(imagePathBuilder("snow.png"));
+                    weatherIcon.setImage(snowImage);
+                    break;
+            }
+
+            temperatureLabel.setText(User.getTemperature() + " C");
+
+            conditionLabel.setText(User.getWeatherCondition());
+
+            precipitationProbLabel.setText(User.getPrecipitationProb() + "%");
+
+            windspeedLabel.setText(User.getWindspeed() + " km/h");
+
+            cityNameLabel.setText(cityInputCapitalize(User.getCityInput()));
+        }
+        if (!User.getStyle().isEmpty()) {
+            switch (User.getStyle()) {
+                case "casual": casualBtn.setSelected(true); break;
+                case "formal": formalBtn.setSelected(true); break;
+                case "sports": sportsBtn.setSelected(true); break;
+                default:
+            }
+        }
+        if (!User.getUpperColor().isEmpty()) {upperColorField.setText(User.getUpperColor());}
+        if (!User.getLowerColor().isEmpty()) {lowerColorField.setText(User.getLowerColor());}
+    }
 }

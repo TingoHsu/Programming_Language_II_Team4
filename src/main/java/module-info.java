@@ -5,6 +5,7 @@ module main.programming_language_ii_team4 {
     requires java.sql;
     requires com.jfoenix;
     requires json.simple;
+    requires org.jsoup;
 
 
     opens main.programming_language_ii_team4 to javafx.fxml;
